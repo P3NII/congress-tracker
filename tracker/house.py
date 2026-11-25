@@ -67,7 +67,7 @@ def fetch_index(year: int) -> list[dict]:
         out.append({
             "chamber": "House",
             "doc_id": g("DocID"),
-            "politician": name.replace("Hon. ", "").strip(),
+            "politician": re.sub(r"\b(Hon\.|Mr\.?|Mrs\.?|Ms\.?|Dr\.?)\s*", "", name).strip(),
             "district": g("StateDst"),
             "filed": filed.isoformat(),
             "year": int(g("Year") or year),
